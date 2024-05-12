@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="participant_form_view" model="ir.ui.view">
+            <field name="name">participant.form.view</field>
+            <field name="model">participant</field>
+            <field name="arch" type="xml">
+                <form string="Participant">
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title"
+                             attrs="{'invisible': [('status', '=', 'draft')]}">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="user_id"/>
+                            </group>
+                            <group>
+                                <field name="course_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="participant_tree_view" model="ir.ui.view">
+            <field name="name">participant.tree.view</field>
+            <field name="model">participant</field>
+            <field name="arch" type="xml">
+                <tree string="participant">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="course_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="participant_act_window_action" model="ir.actions.act_window">
+            <field name="name">Participant</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">participant</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no examples click here to add new ModelTitle.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Participant"
+                  id="participant_menu"
+                  parent="course_management.menu_courses_root"
+                  action="participant_act_window_action"/>
+
+    </data>
+</odoo>
