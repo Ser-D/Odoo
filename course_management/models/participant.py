@@ -1,10 +1,24 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class Participant(models.Model):
-    _name = 'course_management.participant'
+    _name = 'participant'
     _description = 'Course and Participant'
 
-    name = fields.Char(string='Participant name', required=True)
-    user_id = fields.Many2one('res.users', string='Users', required=True)
-    course_id = fields.Many2one('course_management.course', string='Course', required=True)
+    status = fields.Selection(selection=[('draft', 'Draft'), ('done', 'Done')], default='draft')
+    name = fields.Char(string='Participant name')
+    user_id = fields.Many2one(comodel_name='res.partner', string='User', required=True)
+    course_id = fields.Many2one(comodel_name='course', string='Course', required=True)
+
+    @api.model
+    def create(self, vals_list):
+        vals_list['status'] = 'done'
+        if user_id := vals_list.get('user_id'):
+            user = self.env['res.partner'].browse(user_id)
+            vals_list['name'] = user.name if user else ''
+        return super().create(vals_list)
+
+
+
+
+

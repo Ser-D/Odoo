@@ -3,3 +3,4 @@
 
 from . import participant
 from . import course
+from . import lesson

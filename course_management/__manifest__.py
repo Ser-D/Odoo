@@ -3,7 +3,7 @@
 
 
 {
-    'name': 'Any',
+    'name': 'Course management',
     'category': 'Sales/CRM',
     'sequence': 150,
     'summary': 'Centralize your address book',
@@ -11,9 +11,12 @@
 This module gives you a quick view of your contacts directory, accessible from your home page.
 You can track your vendors, customers and other contacts.
 """,
-    'depends': ['base', 'mail'],
+    'depends': ['contacts'],
     'data': [
-        'views/contact_views.xml',
+        'security/ir.model.access.csv',
+        'views/course_views.xml',
+        'views/participant_views.xml',
+        'views/lesson_view.xml',
     ],
     'application': True,
     'license': 'LGPL-3',
